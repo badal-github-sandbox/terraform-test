@@ -137,7 +137,7 @@ data "template_cloudinit_config" "node" {
 
 module "master-mig" {
   source            = "GoogleCloudPlatform/managed-instance-group/google"
-  version           = "1.1.14"
+  version           = "1.1.15"
   name              = "${random_id.instance-prefix.hex}-master"
   region            = "${var.region}"
   zone              = "${var.zone}"
@@ -164,7 +164,7 @@ module "master-mig" {
 
 module "default-pool-mig" {
   source            = "GoogleCloudPlatform/managed-instance-group/google"
-  version           = "1.1.14"
+  version           = "1.1.15"
   name              = "${random_id.instance-prefix.hex}-default-pool"
   region            = "${var.region}"
   zonal             = false
@@ -236,7 +236,7 @@ resource "google_compute_firewall" "vms" {
     protocol = "udp"
   }
 
-  source_ranges = ["${compact(list("10.128.0.0/9","${var.subnetwork != "default" ? data.google_compute_subnetwork.subnet.ip_cidr_range : ""}"))}"]
+  source_ranges = ["${compact(list("10.128.0.0/9", "${var.subnetwork != "default" ? data.google_compute_subnetwork.subnet.ip_cidr_range : ""}"))}"]
 }
 
 data "google_compute_subnetwork" "subnet" {
