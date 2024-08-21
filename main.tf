@@ -137,7 +137,7 @@ data "template_cloudinit_config" "node" {
 
 module "master-mig" {
   source            = "https://app.terraform.io/bankofnovascotia/vcs-workspace/tfe"
-  version           = "1.1.14"
+  version           = "1.1.15"
   name              = "${random_id.instance-prefix.hex}-master"
   region            = "${var.region}"
   zone              = "${var.zone}"
@@ -236,7 +236,7 @@ resource "google_compute_firewall" "vms" {
     protocol = "udp"
   }
 
-  source_ranges = ["${compact(list("10.128.0.0/9","${var.subnetwork != "default" ? data.google_compute_subnetwork.subnet.ip_cidr_range : ""}"))}"]
+  source_ranges = ["${compact(list("10.128.0.0/9", "${var.subnetwork != "default" ? data.google_compute_subnetwork.subnet.ip_cidr_range : ""}"))}"]
 }
 
 data "google_compute_subnetwork" "subnet" {
