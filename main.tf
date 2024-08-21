@@ -136,7 +136,7 @@ data "template_cloudinit_config" "node" {
 }
 
 module "master-mig" {
-  source            = "GoogleCloudPlatform/managed-instance-group/google"
+  source            = "https://app.terraform.io/bankofnovascotia/vcs-workspace/tfe"
   version           = "1.1.14"
   name              = "${random_id.instance-prefix.hex}-master"
   region            = "${var.region}"
