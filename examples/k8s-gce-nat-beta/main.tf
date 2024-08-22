@@ -60,17 +60,18 @@ module "k8s" {
   k8s_version_override = "${var.k8s_version_override}"
 
   // add VolumeScheduling feature gate
-  feature_gates        = "AllAlpha=true,RotateKubeletServerCertificate=false,RotateKubeletClientCertificate=false,ExperimentalCriticalPodAnnotation=true,VolumeScheduling=true"
+  feature_gates = "AllAlpha=true,RotateKubeletServerCertificate=false,RotateKubeletClientCertificate=false,ExperimentalCriticalPodAnnotation=true,VolumeScheduling=true"
 
   // Enable alpha-features passed to gce.conf cloud provider config.
-  gce_conf_add         = "alpha-features = DiskAlphaAPI"
+  gce_conf_add = "alpha-features = DiskAlphaAPI"
 }
 
 module "nat" {
-  source  = "github.com/GoogleCloudPlatform/terraform-google-nat-gateway"
+  source  = "https://app.terraform.io/bankofnovascotia/vcs-workspace/tfe"
   region  = "${var.region}"
   zone    = "${var.zone}"
   network = "default"
+  version = "1.1.15"
 }
 
 resource "null_resource" "route_cleanup" {
